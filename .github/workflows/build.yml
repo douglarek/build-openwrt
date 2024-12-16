@@ -1,8 +1,6 @@
 name: Build openwrt images
 
 on:
-  push:
-    branches: [ "master" ]
   workflow_dispatch:
 
 permissions:
@@ -54,12 +52,17 @@ jobs:
         run: |
           git clone https://github.com/openwrt/openwrt.git --depth=1
           cd openwrt
+          cat ../configs/feeds.conf >> feeds.conf.default
+          cat feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           wget https://downloads.openwrt.org/snapshots/targets/rockchip/armv8/config.buildinfo -O .config
           cat ../configs/ebpf.config >> .config
           cat ../configs/r5c.config >> .config
+          cat ../configs/ib.config >> .config
+          cat ../configs/packages.config >> .config
           make defconfig
+          cat .config
           #make -j1 download world V=s
           make -j $(nproc) download world
           tree ./bin
