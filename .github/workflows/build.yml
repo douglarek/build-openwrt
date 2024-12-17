@@ -61,6 +61,7 @@ jobs:
           cat ../configs/r5c.config >> .config
           cat ../configs/ib.config >> .config
           cat ../configs/packages.config >> .config
+          cat ../configs/rootfs.config >> .config
           make defconfig
           cat .config
           #make -j1 download world V=s
