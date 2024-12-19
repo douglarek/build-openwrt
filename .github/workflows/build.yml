@@ -57,11 +57,7 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           wget https://downloads.openwrt.org/snapshots/targets/rockchip/armv8/config.buildinfo -O .config
-          cat ../configs/ebpf.config >> .config
-          cat ../configs/r5c.config >> .config
-          cat ../configs/ib.config >> .config
-          cat ../configs/packages.config >> .config
-          cat ../configs/rootfs.config >> .config
+          cat ../configs/kernel/*.config >> .config
           make defconfig
           cat .config
           #make -j1 download world V=s
