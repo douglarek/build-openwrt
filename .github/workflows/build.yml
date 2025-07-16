@@ -97,8 +97,8 @@ jobs:
           cat ../configs/kernel/*.config >> .config
           make defconfig
           cat .config
-          make -j1 download world V=s
-          #make -j $(nproc) download world
+          #make -j1 download world V=s
+          make -j $(nproc) download world
           tree ./bin
           tar czvf repo.tgz -C bin .
           cd -
